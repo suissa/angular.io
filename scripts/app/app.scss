@@ -1,0 +1,31 @@
+@import "settings";
+@import "../bower_components/foundation/scss/foundation";
+@import "../bower_components/foundation/scss/normalize";
+
+[clsas*="button"],
+button {
+	transition: none
+}
+
+input[type="text"],
+input[type="password"],
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="week"],
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="tel"],
+input[type="time"],
+input[type="url"],
+input[type="color"],
+textarea {
+	transition: none;
+
+	&:focus,
+	&:active {
+		// border-color: $button-border-color;
+	}
+}

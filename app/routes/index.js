@@ -8,7 +8,7 @@ module.exports = function (app) {
 			return file !== 'index.js';
 		})
 		.forEach(function (file) {
-			var controller = require(path.join(path.dirname(__dirname), 'controllers', file.replace(/$.js/, '')));
+			var controller = require(path.join(path.dirname(__dirname), 'controllers', file.replace(/$.js/, ''))) || null;
 
 			require(path.join(__dirname, file))(app, controller);
 		});

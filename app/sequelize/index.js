@@ -1,6 +1,6 @@
 var Sequelize = require('sequelize');
 
-var sequelize = new Sequelize('angular-io', 'root', '', {
+var sequelize = new Sequelize('angular_io', 'root', '', {
 	dialect: 'mysql',
 	port: 3306,
 	logging: false

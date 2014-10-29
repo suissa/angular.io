@@ -1,5 +1,5 @@
 {
-  "name": "back-end",
+  "name": "angular-io",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,8 +9,121 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^0.8.0",
+    "body-parser": "^1.9.2",
+    "connect-sequelizejs": "^1.0.1",
+    "cookie-parser": "^1.3.3",
     "ejs": "^1.0.0",
     "express": "^4.10.0",
-    "sequelize": "^2.0.0-rc2"
+    "express-session": "^1.9.1",
+    "lusca": "^1.0.2",
+    "mysql": "^2.5.2",
+    "passport": "^0.2.1",
+    "passport-facebook": "^1.0.3",
+    "passport-local": "^1.0.0",
+    "password-generator": "^0.2.3",
+    "sequelize": "^2.0.0-rc2",
+    "underscore": "^1.7.0"
+  },
+  "devDependencies": {
+    "browserify": "^6.2.0",
+    "browserify-shim": "^3.8.0",
+    "glob": "^4.0.6",
+    "gulp": "^3.8.9",
+    "gulp-autoprefixer": "^1.0.1",
+    "gulp-browserify": "^0.5.0",
+    "gulp-concat": "^2.4.1",
+    "gulp-jshint": "^1.8.5",
+    "gulp-ng-annotate": "^0.3.3",
+    "gulp-ng-templates": "0.0.4",
+    "gulp-nodemon": "^1.0.4",
+    "gulp-ruby-sass": "^0.7.1",
+    "gulp-sass": "^1.2.0",
+    "gulp-sourcemaps": "^1.2.4",
+    "gulp-uglify": "^1.0.1",
+    "gulp-uncss": "^0.5.1",
+    "karma": "^0.12.24",
+    "karma-chrome-launcher": "^0.1.5",
+    "karma-jasmine": "^0.1.5"
+  },
+  "browserify": {
+    "transform": [
+      "browserify-shim"
+    ]
+  },
+  "browser": {
+    "hammerjs": "./bower_components/hammerjs/hammer.min.js",
+    "jquery": "./bower_components/jquery/dist/jquery.min.js",
+    "jquery.placeholder": "./bower_components/jquery-placeholder/jquery.placeholder.js",
+    "jquery.cookie": "./bower_components/jquery.cookie/jquery.cookie.js",
+    "angular": "./bower_components/angular/angular.min.js",
+    "angular-material": "./bower_components/angular-material/angular-material.min.js",
+    "angular-animate": "./bower_components/angular-animate/angular-animate.min.js",
+    "angular-sanitize": "./bower_components/angular-sanitize/angular-sanitize.min.js",
+    "angular-resource": "./bower_components/angular-resource/angular-resource.min.js",
+    "angular-aria": "./bower_components/angular-aria/angular-aria.min.js",
+    "angular-mocks": "./bower_components/angular-mocks/angular-mocks.js",
+    "angular-ui-router": "./bower_components/ui-router/release/angular-ui-router.min.js",
+    "angular-foundation_core": "./bower_components/ng-foundation/dist/angular-foundation.js",
+    "angular-foundation": "./bower_components/ng-foundation/dist/angular-foundation.tpl.min.js"
+  },
+  "browserify-shim": {
+    "hammerjs": {
+      "exports": "Hammer"
+    },
+    "angular-ui-router": {
+      "depends": "angular"
+    },
+    "jquery": {
+      "exports": "jQuery"
+    },
+    "angular": {
+      "exports": "angular",
+      "depends": "jquery"
+    },
+    "angular-foundation_core": {
+      "depends": [
+        "angular",
+        "angular-animate",
+        "angular-sanitize"
+      ],
+      "exports": "angular.module('ngFoundation')"
+    },
+    "angular-foundation": {
+      "depends": [
+        "angular",
+        "angular-foundation_core"
+      ],
+      "exports": "angular.module('ngFoundation')"
+    },
+    "angular-material": {
+      "depends": [
+        "angular",
+        "angular-animate",
+        "angular-aria",
+        "hammerjs"
+      ],
+      "exports": "angular.module('ngMaterial')"
+    },
+    "angular-aria": {
+      "depends": "angular",
+      "exports": "angular.module('ngAria')"
+    },
+    "angular-resource": {
+      "depends": "angular",
+      "exports": "angular.module('ngResource')"
+    },
+    "angular-sanitize": {
+      "depends": "angular",
+      "exports": "angular.module('ngSanitize')"
+    },
+    "angular-animate": {
+      "depends": "angular",
+      "exports": "angular.module('ngAnimate')"
+    },
+    "angular-mocks": {
+      "exports": "angular.module('ngMock')",
+      "depends": "angular"
+    }
   }
 }

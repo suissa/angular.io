@@ -1,0 +1,87 @@
+<div class="row">
+	<div class="large-6 columns"></div>
+	<div class="large-6 columns">
+		<h3>Register</h3>
+
+		<form ng-submit="userCreateCtrl.storeUser(user)" name="form">
+			<div class="row">
+				<div class="small-6 columns">
+					<div class="row collapse">
+						<div class="columns" ng-class="{
+							'small-10': form.first_name.$invalid && form.first_name.$dirty,
+							'small-12': !(form.first_name.$invalid && form.first_name.$dirty)
+						}">
+							<input ng-model="user.first_name" name="first_name" required placeholder="Your first name" type="text">
+							<small class="error" ng-show="form.first_name.$invalid && form.first_name.$dirty">
+								You should enter a first name!
+							</small>
+						</div>
+						<div class="small-2 columns" ng-show="form.first_name.$invalid && form.first_name.$dirty">
+							<span class="postfix"><i class="fa fa-warning color-red"></i></span>
+						</div>
+					</div>
+				</div>
+				<div class="small-6 columns">
+					<div class="row collapse">
+						<div class="columns" ng-class="{
+							'small-10': form.last_name.$invalid && form.last_name.$dirty,
+							'small-12': !(form.last_name.$invalid && form.last_name.$dirty)
+						}">
+							<input ng-model="user.last_name" name="last_name" required placeholder="Your last name" type="text">
+							<small class="error" ng-show="form.last_name.$invalid && form.last_name.$dirty">
+								You should enter a last name!
+							</small>
+						</div>
+						<div class="small-2 columns" ng-show="form.last_name.$invalid && form.last_name.$dirty">
+							<span class="postfix"><i class="fa fa-warning color-red"></i></span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="small-12 columns">
+					<div class="row collapse">
+						<div class="columns" ng-class="{
+							'small-11': form.email.$invalid && form.email.$dirty,
+							'small-12': !(form.email.$invalid && form.email.$dirty)
+						}">
+							<input ng-model="user.email" name="email" required placeholder="Your email" type="email">
+							<small class="error" ng-show="form.email.$invalid && form.email.$dirty">
+								You should enter a valid email!
+							</small>
+						</div>
+						<div class="small-1 columns" ng-if="form.email.$invalid && form.email.$dirty">
+							<span class="postfix"><i class="fa fa-warning color-red"></i></span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="small-12 columns">
+					<div class="row collapse">
+						<div class="columns" ng-class="{
+							'small-11': form.password.$invalid && form.password.$dirty,
+							'small-12': !(form.password.$invalid && form.password.$dirty)
+						}">
+							<input ng-model="user.password" name="password" required placeholder="Your password" type="password">
+							<small class="error" ng-show="form.password.$invalid && form.password.$dirty">
+								You should enter a password!
+							</small>
+						</div>
+						<div class="small-1 columns" ng-if="form.password.$invalid && form.password.$dirty">
+							<span class="postfix"><i class="fa fa-warning color-red"></i></span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="small-12 columns">
+					<button class="button" type="submit">Do me!</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

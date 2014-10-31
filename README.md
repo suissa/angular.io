@@ -3,6 +3,6 @@
 ### Running
 ```
 npm install
-cd scripts
+bower install
 gulp
 ```

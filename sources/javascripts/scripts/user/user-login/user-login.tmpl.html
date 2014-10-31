@@ -1,0 +1,43 @@
+<div class="row">
+	<div class="large-6 large-offset-3 columns">
+		<h3>Conectar-se</h3>
+
+		<form ng-submit="userLoginCtrl.authenticate(credentials)">
+			<div class="row">
+				<div class="small-12 columns">
+					<div class="row collapse">
+						<div class="small-11 columns">
+							<input ng-model="credentials.email" required class="no-border-right" placeholder="Your email" type="email">
+						</div>
+						<div class="small-1 columns">
+							<span class="postfix no-border-left">
+								<i class="fa fa-envelope"></i>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="small-12 columns">
+					<div class="row collapse">
+						<div class="small-11 columns">
+							<input ng-model="credentials.password" required class="no-border-right" placeholder="Your password" type="password">
+						</div>
+						<div class="small-1 columns">
+							<span class="postfix no-border-left">
+								<i class="fa fa-lock"></i>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="small-12 columns">
+					<button class="button">Conectar-se</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

@@ -6,8 +6,39 @@
 @import "../../bower_components/fontawesome/scss/font-awesome";
 
 [class*="button"],
+input[type="text"],
+input[type="password"],
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="week"],
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="tel"],
+input[type="time"],
+input[type="url"],
+input[type="color"],
+textarea {
+	border-radius: $global-radius;
+}
+
+[class*="button"],
 button {
-	transition: none
+	$color1: rgba(255, 255, 255, 0.15);
+	$color2: rgba(255, 255, 255, 0);
+	$color3: rgba(0,0,0,.03);
+
+	transition: none;
+	border-width: 1px;
+	box-shadow: 0px 2px 4px -3px #000;
+	text-shadow: 1px 0px 0px rgba(0,0,0, .2);
+	background-image: linear-gradient($color1, $color2, $color3);
+}
+
+.button {
+	border-color: #007EE9 #007EFB #006E8F;
 }
 
 input[type="text"],
@@ -39,4 +70,29 @@ textarea {
 
 .color-red {
 	color: red;
+}
+
+.no-border-right {
+	border-right-width: 0px !important;
+}
+
+.no-border-left {
+	border-left-width: 0px !important;
+}
+
+form .row .row.collapse input,
+.postfix.no-border-left {
+	border-bottom-right-radius: $global-radius;
+	border-top-right-radius: $global-radius;
+}
+
+form .row .row.collapse input {
+	&.no-border-right {
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+	}
+}
+
+.error.error-checking {
+	background-color: green;
 }

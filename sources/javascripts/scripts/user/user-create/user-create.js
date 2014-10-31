@@ -2,11 +2,13 @@
 
 var angular = require('angular');
 
-function UserCreateController ($scope, User) {
+function UserCreateController ($scope, $state, User) {
 	$scope.user = new User;
 
-	this.storeUser = function (user) {
-		user.$save();
+	this.storeUser = function (user) {		
+		user.$save().then(function () {
+			$state.go()
+		});
 	};
 }
 

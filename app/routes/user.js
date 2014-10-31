@@ -5,8 +5,8 @@ var passport = require(path.join(path.dirname(__dirname), 'passport'));
 
 module.exports = function (app, controller) {
 	app
-		.route('/api/user/email-exists')
-		.get(controller.emailExists);
+		.route('/api/user/unique-email')
+		.get(controller.uniqueEmail);
 
 	app
 		.route('/api/auth/local')

@@ -29,7 +29,7 @@ exports.requestProfile = function (req, res) {
 	});
 };
 
-exports.emailExists = function (req, res) {
+exports.uniqueEmail = function (req, res) {
 	var query = req.query;
 
 	User.find({
@@ -46,7 +46,7 @@ exports.emailExists = function (req, res) {
 };
 
 exports.list = function (req, res) {
-	User.findAll().success(function (users) {
+	User.findAll().then(function (users) {
 		users = _.map(users, function (user) {
 			user = _.pick(user, GET_FIELDS);
 			
@@ -58,7 +58,7 @@ exports.list = function (req, res) {
 };
 
 exports.get = function (req, res) {
-	User.find(req.params.user).success(function (user) {		
+	User.find(req.params.user).then(function (user) {		
 		res.json(_.pick(user, GET_FIELDS));
 	}).error(function (err) {
 		res.json(err);
@@ -66,9 +66,9 @@ exports.get = function (req, res) {
 };
 
 exports.store = function (req, res) {
-	User.build(_.pick(req.body, POST_FIELDS)).save().success(function (user) {		
+	User.build(_.pick(req.body, POST_FIELDS)).save().then(function (user) {		
 		res.json(_.pick(user, GET_FIELDS));
-	}).error(function (err) {
+	}, function (err) {
 		res.json(err);
 	});
 };
@@ -78,9 +78,9 @@ exports.destroy = function (req, res) {
 		where: {
 			id: req.params.user
 		}
-	}).success(function (affectedRows) {
+	}).then(function (affectedRows) {
 		res.json({ affectedRows: affectedRows });
-	}).error(function (err) {
+	}, function (err) {
 		res.json(err);
 	});
 };
@@ -90,9 +90,9 @@ exports.update = function (req, res) {
 		where: {
 			id: req.params.user
 		}
-	}).success(function (affectedRows) {
+	}).then(function (affectedRows) {
 		res.json({ affectedRows: affectedRows });
-	}).error(function (err) {
+	}, function (err) {
 		res.json(err);
 	});
 };

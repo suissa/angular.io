@@ -20,8 +20,7 @@ var autoprefixer = require('gulp-autoprefixer');
 var paths = {
 	scripts: 'sources/javascripts/scripts/angular-io.js',
 	stylesheets: [
-		'sources/javascripts/scripts/**/*.{scss,sass,css}',
-		'sources/stylesheets/**/*.{scss,sass,css}',
+		'sources/{javascripts/scripts,stylesheets}/**/*.{scss,sass,css}',
 	],
 	templates: 'sources/javascripts/scripts/**/*.{tmpl.html,html}'
 };

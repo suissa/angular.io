@@ -1,0 +1,15 @@
+<table width="100%">
+	<thead>
+		<tr>
+			<th>title</th>
+			<th>size</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<tr ng-repeat="paste in ::pastes">
+			<td><a ui-sref="paste.detail({ paste: paste.id })" ng-bind="paste.title"></a></td>
+			<td>{{ paste.code.length / 1000 }} KB</td>
+		</tr>
+	</tbody>
+</table>

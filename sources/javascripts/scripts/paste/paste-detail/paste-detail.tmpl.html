@@ -1,0 +1,15 @@
+<form name="form" ng-submit="pasteCreateCtrl.updatePaste(paste)">
+	<textarea ng-codemirror="{
+		mode: 'javascript',
+		lineNumbers: true,
+		tabSize: 2,
+		indentWithTabs: true,
+		lineWrapping: true
+	}"
+	paste-editor-leftbar
+	data-template-url="paste/paste-detail/paste-editor-leftbar-directive.tmpl.html"
+	ng-model="paste.code"
+	cols="30"
+	rows="10">
+	</textarea>
+</form>

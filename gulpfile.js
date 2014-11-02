@@ -1,12 +1,14 @@
 'use strict';
 
+var map = require('map-stream');
 var gulp = require('gulp');
 var glob = require('glob');
 var karma = require('karma').server;
 var path = require('path');
 
-var sass = require('gulp-ruby-sass');
+var sass = require('gulp-sass');
 var uncss = require('gulp-uncss');
+var addSrc = require('gulp-add-src');
 var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
 var jshint = require('gulp-jshint');
@@ -21,6 +23,7 @@ var paths = {
 	scripts: 'sources/javascripts/scripts/angular-io.js',
 	stylesheets: [
 		'sources/{javascripts/scripts,stylesheets}/**/*.{scss,sass,css}',
+		'bower_components/codemirror/**/*.css'
 	],
 	templates: 'sources/javascripts/scripts/**/*.{tmpl.html,html}'
 };
@@ -42,6 +45,31 @@ gulp.task('stylesheets', function () {
 		}))
 		.pipe(concat('app.css'))
 		.pipe(gulp.dest(dest));
+});
+
+gulp.task('dependencies', function () {
+	gulp.src([
+		'bower_components/codemirror/keymap/sublime.js',
+		'bower_components/codemirror/mode/htmlmixed/htmlmixed.js',
+		'bower_components/codemirror/mode/javascript/javascript.js',
+		'bower_components/codemirror/mode/htmlembedded/htmlembedded.js'
+	])
+		.pipe(concat('modes.js'))
+		.pipe(gulp.dest('public/lib/codemirror'));
+
+	gulp.src([
+		'bower_components/codemirror/addon/display/*.js',
+		'bower_components/codemirror/addon/edit/*.js',
+		'bower_components/codemirror/addon/comment/*.js',
+		'bower_components/codemirror/addon/hint/javascript-hint.js',
+		'bower_components/codemirror/addon/selection/*.js',
+		'bower_components/codemirror/addon/scroll/scrollpastend.js',
+		'bower_components/codemirror/addon/mode/multiplex.js',
+		'bower_components/codemirror/addon/fold/*.js',
+		'bower_components/codemirror/addon/runmode/colorize.js',
+	])
+		.pipe(concat('addons.js'))
+		.pipe(gulp.dest('public/lib/codemirror'));
 });
 
 gulp.task('templates', function () {
@@ -67,6 +95,7 @@ gulp.task('scripts', ['jshint'], function () {
 			debug: true
 		}))
 		.pipe(ngAnnotate())
+		.pipe(concat('angular-io.js'))
 		.pipe(gulp.dest(dest));
 });
 
@@ -84,10 +113,8 @@ gulp.task('test', function (done) {
 });
 
 gulp.task('serve', function () {
-	nodemon({
-		script: __dirname
-	});
+	require(__dirname);
 });
 
 gulp.task('bundles', ['scripts', 'stylesheets', 'templates']);
-gulp.task('default', ['bundles', 'watch', 'serve']);
+gulp.task('default', ['dependencies', 'bundles', 'watch', 'serve']);

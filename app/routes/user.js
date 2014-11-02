@@ -5,8 +5,19 @@ var passport = require(path.join(path.dirname(__dirname), 'passport'));
 
 module.exports = function (app, controller) {
 	app
+		.route('/api/user/request-profile')
+		.get(controller.requestProfile);
+
+	app
 		.route('/api/user/unique-email')
 		.get(controller.uniqueEmail);
+
+	app
+		.route('/api/auth/destroy')
+		.post(function (req, res) {
+			req.logout();
+			res.status(200).end();
+		});
 
 	app
 		.route('/api/auth/local')
@@ -34,6 +45,10 @@ module.exports = function (app, controller) {
 		.route('/api/user')
 		.get(controller.list)
 		.post(controller.store);
+
+	app
+		.route('/api/user/pastes')
+		.get(controller.getPastes);
 
 	app
 		.route('/api/user/:user')

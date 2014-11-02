@@ -8,10 +8,12 @@ var modl = angular.module('angular-io', [
 	
 	require('./components/components').name,
 	require('./user/user').name,
+	require('./paste/paste').name,
 	require('./home/home').name
 ])
-	.config(function ($locationProvider) {
+	.config(function ($locationProvider, $resourceProvider) {
 		$locationProvider.html5Mode(true).hashPrefix('!');
+		$resourceProvider.defaults.stripTrailingSlashes = false;
 	});
 
 module.exports = modl;

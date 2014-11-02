@@ -96,3 +96,19 @@ form .row .row.collapse input {
 .error.error-checking {
 	background-color: green;
 }
+
+.off-canvas-list {
+	input,
+	textarea {
+		&,
+		&:focus,
+		&:hover,
+		&:active {
+			margin: 0;
+			border-radius: 0;
+			background-color: rgba(0,0,0,.30);
+			border-color: rgba(0,0,0,.20);
+			color: #fff;
+		}
+	}
+}

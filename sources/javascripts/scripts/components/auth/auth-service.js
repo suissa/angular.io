@@ -2,24 +2,66 @@
 
 var angular = require('angular');
 
-var modl = angular.module('angular-io.components.auth.service', [])
-	.factory('Auth', function ($http) {
-		var Auth = this,
-		logged = null;
+function AuthProvider () {
+	var AuthProvider = this;
 
-		this.checkSync = function () {
-			return logged || false;
-		};
+	this.$get = function ($http, $q, Session) {
+		function AuthFactory () {
+			var Auth = {},
+			logged = null,
+			asyncCheck = true,
+			user = Session.getUser();
 
-		this.check = function () {
-			return $http.get('/api/auth/check').success(function (data) {
-				logged = data.result;
+			Auth.authenticate = function (credentials) {
+				return $http.post('/api/auth/local', credentials).success(function (data) {
+					return data.result;
+				});
+			};
 
-				return logged;
-			});
-		};
+			Auth.checkSync = function () {
+				return logged || false;
+			};
 
-		return this;
-	});
+			Auth.requestProfile = function () {
+				return $http.get('/api/user/request-profile').then(function (res) {
+					return Session.updateUser(res.data);
+				});
+			};
+
+			Auth.check = function () {
+				if(!asyncCheck) {
+					return $q.when(Auth.checkSync());
+				}
+
+				if(user.id) {
+					asyncCheck = false;
+				}
+
+				return $http.get('/api/auth/check').then(function (res) {
+					logged = res.data.result;
+
+					if(user && typeof user.id === 'number' && logged || !logged) {
+						return logged;
+					}
+
+					return Auth.requestProfile().then(function (user) {
+						return user.id && logged === true;
+					});
+				}).finally(function () {
+					setTimeout(function () {
+						asyncCheck = true;
+					}, 800);
+				});
+			};
+
+			return Auth;
+		}
+
+		return new AuthFactory;
+	};
+}
+
+var modl = angular.module('angular-io.components.auth.services.auth', [])
+	.provider('Auth', AuthProvider);
 
 module.exports = modl;

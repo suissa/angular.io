@@ -17,12 +17,15 @@
     "express": "^4.10.0",
     "express-session": "^1.9.1",
     "lusca": "^1.0.2",
+    "method-override": "^2.3.0",
+    "morgan": "^1.4.1",
+    "multer": "^0.1.6",
     "mysql": "^2.5.2",
     "passport": "^0.2.1",
     "passport-facebook": "^1.0.3",
     "passport-local": "^1.0.0",
     "password-generator": "^0.2.3",
-    "sequelize": "^2.0.0-rc2",
+    "sequelize": "~2.0.0",
     "underscore": "^1.7.0"
   },
   "devDependencies": {
@@ -30,6 +33,7 @@
     "browserify-shim": "^3.8.0",
     "glob": "^4.0.6",
     "gulp": "^3.8.9",
+    "gulp-add-src": "^0.1.1",
     "gulp-autoprefixer": "^1.0.1",
     "gulp-browserify": "^0.5.0",
     "gulp-concat": "^2.4.1",
@@ -38,7 +42,7 @@
     "gulp-ng-templates": "0.0.4",
     "gulp-nodemon": "^1.0.4",
     "gulp-ruby-sass": "^0.7.1",
-    "gulp-sass": "^1.2.0",
+    "gulp-sass": "1.1.0",
     "gulp-sourcemaps": "^1.2.4",
     "gulp-uglify": "^1.0.1",
     "gulp-uncss": "^0.5.1",
@@ -53,11 +57,14 @@
     ]
   },
   "browser": {
+    "codemirror": "./bower_components/codemirror/lib/codemirror.js",
     "hammerjs": "./bower_components/hammerjs/hammer.min.js",
     "jquery": "./bower_components/jquery/dist/jquery.min.js",
     "jquery.placeholder": "./bower_components/jquery-placeholder/jquery.placeholder.js",
     "jquery.cookie": "./bower_components/jquery.cookie/jquery.cookie.js",
     "angular": "./bower_components/angular/angular.min.js",
+    "angular-ui-utils": "./bower_components/angular-ui-utils/ui-utils.min.js",
+    "angular-codemirror": "./bower_components/ng-codemirror/src/ng-codemirror.js",
     "angular-material": "./bower_components/angular-material/angular-material.min.js",
     "angular-animate": "./bower_components/angular-animate/angular-animate.min.js",
     "angular-sanitize": "./bower_components/angular-sanitize/angular-sanitize.min.js",
@@ -69,6 +76,17 @@
     "angular-foundation": "./bower_components/ng-foundation/dist/angular-foundation.tpl.min.js"
   },
   "browserify-shim": {
+    "codemirror": {
+      "exports": "CodeMirror"
+    },
+    "angular-ui-utils": {
+      "exports": "angular.module('ui.utils')",
+      "depends": "angular"
+    },
+    "angular-codemirror": {
+      "depends": ["angular", "codemirror"],
+      "exports": "angular.module('ngCodemirror')"
+    },
     "hammerjs": {
       "exports": "Hammer"
     },
@@ -80,7 +98,10 @@
     },
     "angular": {
       "exports": "angular",
-      "depends": "jquery"
+      "depends": [
+        "jquery",
+        "codemirror"
+      ]
     },
     "angular-foundation_core": {
       "depends": [

@@ -31,26 +31,17 @@ textarea {
 	&.ng-enter-active,
 	&.ng-leave,
 	&.ng-leave-active {
-		transition: 0.4s all ease-in-out;
 	}
 
 	&.ng-enter {
-		transform: scale3d(0.95, 0.96, 0.95) translateX(-3%);
-		opacity: 0.3;
 	}
 
 	&.ng-enter-active {
-		transform: scale3d(1, 1, 1) translateX(0%);
-		opacity: 1;
 	}
 
 	&.ng-leave {
-		transform: scale3d(1, 1, 1) translateX(0%);
-		opacity: 0.5;
 	}
 
 	&.ng-leave-active {
-		transform: scale3d(0.95, 0.95, 0.95) translateX(-3%);
-		opacity: 0.1;
 	}
 }

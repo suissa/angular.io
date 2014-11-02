@@ -7,7 +7,7 @@ function UserCreateController ($scope, $state, User) {
 
 	this.storeUser = function (user) {		
 		user.$save().then(function () {
-			$state.go()
+			$state.go('user.login');
 		});
 	};
 }

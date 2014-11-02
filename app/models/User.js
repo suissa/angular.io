@@ -29,6 +29,11 @@ module.exports = function (sequelize, DataTypes) {
 				return bcrypt.compareSync(password, this.password);
 			}
 		},
+		getterMethods: {
+			name: function () {
+				return this.first_name + ' ' + this.last_name;
+			}
+		},
 		setterMethods: {
 			password: function (password) {
 				var salt = bcrypt.genSaltSync(10);

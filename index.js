@@ -4,9 +4,12 @@ var express = require('express');
 var path = require('path');
 
 var lusca = require('lusca');
+var multer = require('multer');
+var morgan = require('morgan');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
+var methodOverride = require('method-override');
 var SequelizeStore = require('connect-sequelizejs')(session.Store);
 
 var app = express();
@@ -16,9 +19,11 @@ var sequelize = require(path.join(__dirname, 'app', 'sequelize'));
 app.set('views', path.join(__dirname, 'app', 'views'));
 app.set('view engine', 'ejs');
 
+app.use(multer());
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
 app.use(session({
 	saveUninitialized: true,
 	resave: true,
@@ -43,6 +48,7 @@ app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/lib', express.static(path.join(__dirname, 'bower_components')));
 app.use('/images', express.static(path.join(__dirname, 'sources', 'images')));
+app.use(morgan('tiny'));
 
 // routes
 require(path.join(__dirname, 'app', 'routes'))(app);

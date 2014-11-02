@@ -27,9 +27,19 @@
 					<li ui-sref-active="active">
 						<a ui-sref="home.index">Home</a>
 					</li>
+
+					<li ui-sref-active="active">
+						<a ui-sref="paste.create">Create new paste</a>
+					</li>
 				</ul>
 
-				<ul class="right">
+				<ul if-logged class="right">
+					<li ui-sref-active="active">
+						<a ui-sref="user.profile">Profile</a>
+					</li>
+				</ul>
+
+				<ul if-not-logged class="right">
 					<li ui-sref-active="active">
 						<a ui-sref="user.login">Login</a>
 					</li>
@@ -43,6 +53,8 @@
 		<div ui-view></div>
 
 		<script src="js/angular-io.js"></script>
+		<script src="lib/codemirror/addons.js"></script>
+		<script src="lib/codemirror/modes.js"></script>
 		<script src="js/templates.js"></script>
 		<script>
 			angular.element(document).ready(function () {

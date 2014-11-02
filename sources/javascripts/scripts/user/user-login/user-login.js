@@ -2,8 +2,12 @@
 
 var angular = require('angular');
 
-function UserLoginController (Auth) {
-	this.authenticate = Auth;
+function UserLoginController (Auth, $state) {
+	this.authenticate = function (credentials) {
+		Auth.authenticate(credentials).then(function () {
+			$state.go('user.profile');
+		});
+	};
 }
 
 var modl = angular.module('angular-io.user.login', [])

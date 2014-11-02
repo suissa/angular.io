@@ -1,0 +1,10 @@
+<div class="editor-leftbar">
+	<ul class="off-canvas-list">
+		<li><label>Leftbar helper</label></li>
+		<li><input ng-model="paste.title" placeholder="Paste title" type="text"></li>
+		<li><label>Options</label></li>
+		<li ng-click="pasteDetailCtrl.updatePaste(paste)"><a><i class="fa fa-save"></i> Salvar</a></li>
+		<li><label>Author</label></li>
+		<li><a ui-sref="user.detail({ user: paste.author.id })" ng-bind="paste.author.name"></a></li>
+	</ul>
+</div>

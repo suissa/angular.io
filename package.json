@@ -62,6 +62,7 @@
     "jquery": "./bower_components/jquery/dist/jquery.min.js",
     "jquery.placeholder": "./bower_components/jquery-placeholder/jquery.placeholder.js",
     "jquery.cookie": "./bower_components/jquery.cookie/jquery.cookie.js",
+    "jquery.slimscroll": "./bower_components/slimScroll/jquery.slimscroll.min.js",
     "angular": "./bower_components/angular/angular.min.js",
     "angular-ui-utils": "./bower_components/angular-ui-utils/ui-utils.min.js",
     "angular-codemirror": "./bower_components/ng-codemirror/src/ng-codemirror.js",
@@ -100,6 +101,9 @@
       "exports": "angular",
       "depends": [
         "jquery",
+        "jquery.slimscroll",
+        "jquery.placeholder",
+        "jquery.cookie",
         "codemirror"
       ]
     },

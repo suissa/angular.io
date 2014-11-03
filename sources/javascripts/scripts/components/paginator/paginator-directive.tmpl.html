@@ -1,0 +1,13 @@
+<ul class="pagination">
+  <li ng-click="paginatorCtrl.previousPage()" ng-class="{ 'unavailable': paginator.currentPage === 1 }" class="arrow">
+  	<a href="">&laquo;</a>
+  </li>
+  <li ng-repeat="page in paginator.pages track by $index" ng-class="{
+  	'current': paginator.currentPage === page
+  }" ng-click="paginatorCtrl.setPage(page)">
+  	<a href="">{{ ::page }}</a>
+  </li>
+  <li ng-click="paginatorCtrl.nextPage()" ng-class="{ 'unavailable': paginator.currentPage === paginator.lastPage }" class="arrow">
+  	<a href="">&raquo;</a>
+  </li>
+</ul>

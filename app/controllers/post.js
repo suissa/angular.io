@@ -2,50 +2,22 @@
 
 var _ = require('underscore');
 var path = require('path');
+var Paginator = require(path.join(path.dirname(__dirname), 'paginator'));
 
 var models = require(path.join(path.dirname(__dirname), 'models'));
-var Paste = models.Paste;
+var Post = models.Post;
 var User = models.User;
+var Category = models.Category;
 
 var GET_FIELDS = [
 	'id',
 	'title',
-	'code'
+	'body'
 ];
 
 var POST_FIELDS = GET_FIELDS;
 
 exports.list = function (req, res) {
-	var query = req.query;
-
-	var options = {
-		attributes: GET_FIELDS,
-		where: {}
-	};
-
-	// if we want to search the pastes
-	// by the author/user_id
-	_.each(['author_id'], function (key) {
-		if(_.isUndefined(query[key])) return;
-
-		options.where[key] = query[key];
-	});
-
-	options.include = [{
-		model: User,
-		as: 'author',
-		attributes: ['id', 'first_name', 'last_name']
-	}];
-
-	Paste.findAll(options)
-		.then(function (pastes) {
-			res.json(pastes);
-		}, function (err) {
-			res.json(err);
-		});
-};
-
-exports._list_ = function (req, res) {
 	var query = req.query;
 
 	// paginator configs
@@ -60,7 +32,7 @@ exports._list_ = function (req, res) {
 
 	// if we want to search the pastes
 	// by the author/user_id
-	_.each(['author_id'], function (key) {
+	_.each(['author_id', 'category_id'], function (key) {
 		if(_.isUndefined(query[key])) return;
 
 		options.where[key] = query[key];
@@ -76,21 +48,28 @@ exports._list_ = function (req, res) {
 		model: User,
 		as: 'author',
 		attributes: ['first_name', 'last_name']
+	}, {
+		model: Category,
+		as: 'category'
 	}];
 
-	Paste.findAndCountAll(options)
+	Post.findAndCountAll(options)
 		.then(function (result) {
 			var rows = result.rows;
 			var count = result.count;
 
 			var currentPage = paginator.getCurrentPage();
 			var lastPage = paginator.getLastPage(count);
+			var pages = paginator.getPages();
 
 			res.json({
-				rows: rows,
-				count: count,
-				currentPage: currentPage,
-				lastPage: lastPage
+				data: rows,
+				pagination: {
+					count: count,
+					currentPage: currentPage,
+					lastPage: lastPage,
+					pages: pages
+				}
 			});
 		}, function (err) {
 			res.json(err);
@@ -98,39 +77,51 @@ exports._list_ = function (req, res) {
 };
 
 exports.get = function (req, res) {
-	Paste.find({
+	Post.find({
 		where: {
-			id: req.params.paste
+			id: req.params.post
 		},
 		attributes: GET_FIELDS,
 		include: [{
 			model: User,
 			as: 'author',
-			attributes: ['id', 'first_name', 'last_name']
+			attributes: ['first_name', 'last_name']
+		}, {
+			model: Category,
+			as: 'category',
+			attributes: ['name']
 		}]
-	}).then(function (paste) {
-		res.json(paste);
+	}).then(function (post) {
+		res.json(post);
 	}, function (err) {
 		res.json(err);
 	});
 };
 
 exports.store = function (req, res) {
-	var paste = _.pick(req.body, POST_FIELDS);
+	var post = _.pick(req.body, POST_FIELDS);
 	
 	var author_id = (req.user.id || 0);
 
-	Paste.build(paste).save().then(function (paste) {		
-		Paste.find({
+	Post.build(post).save().then(function (post) {		
+		Post.find({
 			where: {
-				id: paste.id
+				id: post.id
 			},
 			attributes: GET_FIELDS
-		}).then(function (paste) {
+		}).then(function (post) {
 			User.find(author_id).then(function (user) {
-				paste.setAuthor(user).then(function () {
-					res.json(paste);
+				post.setAuthor(user).then(function () {
+					Category.find({
+						where: {
+							id: req.body.category_id || 0
+						}
+					}).then(function (category) {
+						post.setCategory(category);
+					});
 				});
+
+				res.json(post);
 			});
 		}, function (err) {
 			res.json(err);
@@ -143,9 +134,9 @@ exports.store = function (req, res) {
 exports.destroy = function (req, res) {
 	var author_id = req.user.id || 0;
 
-	Paste.destroy({
+	Post.destroy({
 		where: {
-			id: req.params.paste,
+			id: req.params.post,
 			author_id: author_id
 		}
 	}).then(function (affectedRows) {
@@ -158,11 +149,11 @@ exports.destroy = function (req, res) {
 exports.update = function (req, res) {
 	var author_id = req.user.id || 0;
 
-	var paste = _.pick(req.body, POST_FIELDS);
+	var post = _.pick(req.body, POST_FIELDS);
 
-	Paste.update(paste, {
+	Post.update(post, {
 		where: {
-			id: req.params.paste,
+			id: req.params.post,
 			author_id: req.user.id
 		}
 	}).then(function (affectedRows) {

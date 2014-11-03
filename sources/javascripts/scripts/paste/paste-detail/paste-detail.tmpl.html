@@ -1,15 +1,33 @@
 <form name="form" ng-submit="pasteCreateCtrl.updatePaste(paste)">
-	<textarea ng-codemirror="{
-		mode: 'javascript',
-		lineNumbers: true,
-		tabSize: 2,
-		indentWithTabs: true,
-		lineWrapping: true
-	}"
-	paste-editor-leftbar
-	data-template-url="paste/paste-detail/paste-editor-leftbar-directive.tmpl.html"
-	ng-model="paste.code"
-	cols="30"
-	rows="10">
-	</textarea>
+	<div class="editor-topbar" ng-init="collapsed = false">
+		<ul class="off-canvas-list" ng-hide="collapsed">
+			<li ng-click="collapsed = true"><label>Open topbar</label></li>
+		</ul>
+		<ul class="off-canvas-list" ng-show="collapsed">
+			<li><label>Topbar</label></li>
+			<li><input ng-model="paste.title" placeholder="Paste title" type="text" ng-disabled="(!paste.author || paste.author && paste.author.id !== user.id)"></li>
+			<li ng-if="paste.author"><label>Author</label></li>
+			<li ng-if="paste.author"><a href="">{{ ::paste.author.name }}</a></li>
+			<li><label>Options</label></li>
+			<li ng-if="(paste.author && paste.author.id === user.id)" ng-click="pasteCreateCtrl.updatePaste(paste)">
+				<a>
+					<i class="fa fa-save"></i> {{ paste.saving ? 'Salvando...' : 'Salvar' }}
+				</a>
+			</li>
+			<li ng-click="collapsed = false"><a><i class="fa fa-close"></i> Fechar</a></li>
+		</ul>
+	</div>
+	<div class="editor-column">
+		<textarea ng-codemirror="{
+			mode: 'javascript',
+			lineNumbers: true,
+			tabSize: 2,
+			indentWithTabs: true,
+			lineWrapping: true,
+			readOnly: (paste.author.id === user.id)
+		}"
+		ng-model="paste.code"
+		cols="30"
+		rows="10"></textarea>
+	</div>
 </form>

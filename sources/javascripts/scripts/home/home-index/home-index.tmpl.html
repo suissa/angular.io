@@ -1,1 +1,27 @@
 <h1>Welcome!</h1>
+
+<div class="row">
+	<div class="large-2 columns">
+		<h5>Categories</h5>
+
+		<ul class="side-nav">
+			<li ng-click="query.category_id = 0"><a href="">None</a></li>
+			<li ng-repeat="category in ::categories" ng-click="query.category_id = category.id"><a href="">{{ ::category.name }}</a></li>
+		</ul>
+	</div>
+	<div class="large-10 columns">
+		<div class="row">
+			<div class="small-12 columns" ng-if="!posts.length">
+				<h2>Sorry! We did find no posts.</h2>
+			</div>
+		</div>
+		<div class="row" ng-repeat="post in posts" ng-if="posts.length">
+			<div class="small-12 columns">
+				<h6><a href="">{{ ::post.title }}</a></h6>
+				<p>{{ ::post.body }}</p>
+			</div>
+		</div>
+
+		<paginator ng-show="posts.length"></paginator>
+	</div>
+</div>

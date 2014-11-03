@@ -2,15 +2,15 @@
 
 var angular = require('angular');
 
-function PasteDetailController ($scope, paste) {
+function PasteDetailController ($scope, paste, Session) {
 	$scope.paste = paste;
+	$scope.user = Session.getUser();
 
 	this.updatePaste = function (paste) {
+		paste.saving = true;
+
 		paste
-			.$update({ paste: paste.id })
-			.then(function (paste) {
-				//
-			});
+			.$update({ paste: paste.id });
 	};
 }
 

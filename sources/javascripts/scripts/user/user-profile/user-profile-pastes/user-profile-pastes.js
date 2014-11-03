@@ -14,10 +14,8 @@ var modl = angular.module('angular-io.user.profile.pastes', [])
 				url: '/pastes',
 				templateUrl: 'user/user-profile/user-profile-pastes/user-profile-pastes.tmpl.html',
 				resolve: {
-					pastes: function ($http) {
-						return $http.get('/api/user/pastes').then(function (res) {
-							return res.data;
-						});
+					pastes: function (Session, Paste) {
+						return Paste.query({ author_id: Session.getUser().id }).$promise;
 					}
 				},
 				controller: 'UserProfilePastesController',

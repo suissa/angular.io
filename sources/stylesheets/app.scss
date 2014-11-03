@@ -5,6 +5,24 @@
 @import "fontawesome/variables";
 @import "../../bower_components/fontawesome/scss/font-awesome";
 
+.top-bar {
+	background-image: none;
+	background-color: #ffffff;
+	box-shadow: 0px 1px 0px 0px rgba(0,0,0,0.1);
+
+	.dropdown li a {
+		border-color: rgba(0,0,0,0) rgba(0,0,0,.04) rgba(0,0,0,0) rgba(0,0,0,0.02);
+	}
+
+	.dropdown li:last-child a {
+		border-color: rgba(0,0,0,0) rgba(0,0,0,.04) rgba(0,0,0,.10) rgba(0,0,0,0.02);
+		border-bottom-left-radius: 4px;
+		border-bottom-right-radius: 4px;
+		border-width: 1px;
+		border-style: solid;
+	}
+}
+
 [class*="button"],
 input[type="text"],
 input[type="password"],
@@ -103,7 +121,8 @@ form .row .row.collapse input {
 		&,
 		&:focus,
 		&:hover,
-		&:active {
+		&:active,
+		&[disabled] {
 			margin: 0;
 			border-radius: 0;
 			background-color: rgba(0,0,0,.30);

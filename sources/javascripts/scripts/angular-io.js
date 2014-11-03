@@ -8,7 +8,9 @@ var modl = angular.module('angular-io', [
 	
 	require('./components/components').name,
 	require('./user/user').name,
+	require('./post/post').name,
 	require('./paste/paste').name,
+	require('./category/category').name,
 	require('./home/home').name
 ])
 	.config(function ($locationProvider, $resourceProvider) {

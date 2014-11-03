@@ -12,7 +12,8 @@ var Category = models.Category;
 var GET_FIELDS = [
 	'id',
 	'title',
-	'body'
+	'body',
+	'created_at'
 ];
 
 var POST_FIELDS = GET_FIELDS;

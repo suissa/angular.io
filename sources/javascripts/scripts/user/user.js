@@ -11,7 +11,7 @@ var modl = angular.module('angular-io.user', [
 	.config(function ($stateProvider) {
 		$stateProvider
 			.state('user', {
-				url: '/u',
+				url: '/user',
 				templateUrl: 'user/user.tmpl.html'
 			});
 	});

@@ -5,7 +5,11 @@ var Sequelize = require('sequelize');
 module.exports = function (sequelize, DataTypes) {
 	var Post = sequelize.define('Post', {
 		title: DataTypes.STRING(255),
-		body: DataTypes.TEXT
+		body: DataTypes.TEXT,
+		status: {
+			type: DataTypes.ENUM,
+			values: ['open', 'solved', 'closed']
+		}
 	}, {
 		timestamps: true,
 		paranoid: true,

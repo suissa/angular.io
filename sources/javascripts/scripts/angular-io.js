@@ -10,8 +10,7 @@ var modl = angular.module('angular-io', [
 	require('./user/user').name,
 	require('./post/post').name,
 	require('./paste/paste').name,
-	require('./category/category').name,
-	require('./home/home').name
+	require('./category/category').name
 ])
 	.config(function ($locationProvider, $resourceProvider) {
 		$locationProvider.html5Mode(true).hashPrefix('!');

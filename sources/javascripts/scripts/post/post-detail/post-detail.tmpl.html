@@ -14,3 +14,17 @@
 		</div>
 	</div>
 </div>
+
+<div class="row" ng-repeat="comment in ::post.comments">
+	<div class="large-12 columns">
+		<div class="row">
+			<div class="large-12 columns">
+				<img style="float: left" ng-src="{{ ::'http://placehold.it/32x32' }}" width="32" height="32">
+				<h6>{{ ::comment.author.name }}</h6>
+				<small>{{ ::comment.created_at }}</small>
+			</div>
+		</div>
+
+		<p>{{ ::comment.body }}</p>
+	</div>
+</div>

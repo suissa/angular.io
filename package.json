@@ -18,6 +18,7 @@
     "express-session": "^1.9.1",
     "lusca": "^1.0.2",
     "method-override": "^2.3.0",
+    "moment": "^2.8.3",
     "morgan": "^1.4.1",
     "multer": "^0.1.6",
     "mysql": "^2.5.2",
@@ -25,12 +26,13 @@
     "passport-facebook": "^1.0.3",
     "passport-local": "^1.0.0",
     "password-generator": "^0.2.3",
-    "sequelize": "~2.0.0",
+    "sequelize": "^2.0.0-rc2",
     "underscore": "^1.7.0"
   },
   "devDependencies": {
     "browserify": "^6.2.0",
     "browserify-shim": "^3.8.0",
+    "faker": "^2.0.1",
     "glob": "^4.0.6",
     "gulp": "^3.8.9",
     "gulp-add-src": "^0.1.1",
@@ -67,6 +69,7 @@
     "angular-ui-utils": "./bower_components/angular-ui-utils/ui-utils.min.js",
     "angular-codemirror": "./bower_components/ng-codemirror/src/ng-codemirror.js",
     "angular-material": "./bower_components/angular-material/angular-material.min.js",
+    "angular-moment": "./bower_components/ng-moment/dist/ng-moment.min.js",
     "angular-animate": "./bower_components/angular-animate/angular-animate.min.js",
     "angular-sanitize": "./bower_components/angular-sanitize/angular-sanitize.min.js",
     "angular-resource": "./bower_components/angular-resource/angular-resource.min.js",
@@ -85,8 +88,18 @@
       "depends": "angular"
     },
     "angular-codemirror": {
-      "depends": ["angular", "codemirror"],
+      "depends": [
+        "angular",
+        "codemirror"
+      ],
       "exports": "angular.module('ngCodemirror')"
+    },
+    "angular-moment": {
+      "depends": [
+        "angular",
+        "moment"
+      ],
+      "exports": "angular.module('ngMoment')"
     },
     "hammerjs": {
       "exports": "Hammer"

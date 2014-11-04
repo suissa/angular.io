@@ -6,6 +6,7 @@ var Paginator = require(path.join(path.dirname(__dirname), 'paginator'));
 
 var models = require(path.join(path.dirname(__dirname), 'models'));
 var Post = models.Post;
+var Comment = models.Comment;
 var User = models.User;
 var Category = models.Category;
 
@@ -13,6 +14,7 @@ var GET_FIELDS = [
 	'id',
 	'title',
 	'body',
+	'status',
 	'created_at'
 ];
 
@@ -33,10 +35,15 @@ exports.list = function (req, res) {
 
 	// if we want to search the pastes
 	// by the author/user_id
-	_.each(['author_id', 'category_id'], function (key) {
+	_.each(['author_id', 'category_id', 'status'], function (key) {
 		if(_.isUndefined(query[key])) return;
 
 		options.where[key] = query[key];
+	});
+
+	_.each(['author_id', 'category_id'], function (key) {
+		if(_.isUndefined(options.where[key])) return;
+		options.where[key] = Number(options.where[key]);
 	});
 
 	// the startFrom and the
@@ -50,8 +57,8 @@ exports.list = function (req, res) {
 		as: 'author',
 		attributes: ['first_name', 'last_name']
 	}, {
-		model: Category,
-		as: 'category'
+		as: 'category',
+		model: Category
 	}];
 
 	Post.findAndCountAll(options)
@@ -86,11 +93,19 @@ exports.get = function (req, res) {
 		include: [{
 			model: User,
 			as: 'author',
-			attributes: ['first_name', 'last_name']
+			attributes: ['first_name', 'last_name', 'id']
 		}, {
 			model: Category,
 			as: 'category',
 			attributes: ['name']
+		}, {
+			model: Comment,
+			as: 'comments',
+			include: [{
+				model: User,
+				as: 'author',
+				attributes: ['first_name', 'last_name', 'id']
+			}]
 		}]
 	}).then(function (post) {
 		res.json(post);

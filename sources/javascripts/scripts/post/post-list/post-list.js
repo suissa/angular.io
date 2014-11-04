@@ -2,7 +2,7 @@
 
 var angular = require('angular');
 
-function HomeIndexController ($scope, Post, categories) {
+function PostListController ($scope, Post, categories) {
 	$scope.query = {};
 	$scope.categories = categories;
 	$scope.$watchCollection('query', function (query) {
@@ -16,7 +16,7 @@ function HomeIndexController ($scope, Post, categories) {
 			page: page
 		};
 
-		angular.forEach(['category_id'], function (key) {
+		angular.forEach(['category_id', 'status'], function (key) {
 			var query = $scope.query;
 			if(!query) return;
 			if(angular.isDefined(query[key])) {
@@ -35,21 +35,21 @@ function HomeIndexController ($scope, Post, categories) {
 	});
 }
 
-var modl = angular.module('angular-io.home.index', [])
+var modl = angular.module('angular-io.post.list', [])
 	.config(function ($stateProvider) {
 		$stateProvider
-			.state('home.index', {
-				url: '/index',
-				templateUrl: 'home/home-index/home-index.tmpl.html',
+			.state('post.list', {
+				url: '/list',
+				templateUrl: 'post/post-list/post-list.tmpl.html',
 				resolve: {
 					categories: function (Category) {
 						return Category.query().$promise;
 					}
 				},
-				controller: 'HomeIndexController',
-				controllerAs: 'homeIndexCtrl'
+				controller: 'PostListController',
+				controllerAs: 'postListCtrl'
 			});
 	})
-	.controller('HomeIndexController', HomeIndexController);
+	.controller('PostListController', PostListController);
 
 module.exports = modl;

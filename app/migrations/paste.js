@@ -1,5 +1,7 @@
 'use strict';
 
+var faker = require('faker');
+
 module.exports = function (sequelize, models) {
 	var Paste = models.Paste;
 
@@ -7,7 +9,7 @@ module.exports = function (sequelize, models) {
 
 	for(var i=0; i<200; i++) {
 		categories.push({
-			title: 'Some example paste',
+			title: faker.lorem.words(2).join(' '),
 			code: '(function () {});'
 		});
 	}

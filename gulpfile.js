@@ -1,6 +1,5 @@
 'use strict';
 
-var map = require('map-stream');
 var gulp = require('gulp');
 var glob = require('glob');
 var karma = require('karma').server;
@@ -8,7 +7,6 @@ var path = require('path');
 
 var sass = require('gulp-sass');
 var uncss = require('gulp-uncss');
-var addSrc = require('gulp-add-src');
 var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
 var jshint = require('gulp-jshint');

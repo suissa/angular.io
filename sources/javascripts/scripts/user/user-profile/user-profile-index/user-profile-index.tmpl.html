@@ -1,0 +1,12 @@
+<div class="row">
+	<div class="small-4 columns" ng-if="!user.profile_photo">
+		<img src="http://placehold.it/400x400" alt="">
+	</div>
+	<div class="small-4 columns" ng-if="user.profile_photo">
+		<img ng-src="{{ ::user.profile_photo }}" alt="">
+	</div>
+
+	<div class="small-8 columns">
+		<h4>Welcome, {{ ::user.name }}!</h4>
+	</div>
+</div>

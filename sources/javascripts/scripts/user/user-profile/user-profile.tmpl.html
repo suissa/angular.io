@@ -1,19 +1,19 @@
 <div class="row">
 	<div class="small-12 columns">
-		<h3 ng-bind="user.name"></h3>		
+		<div class="icon-bar five-up">
+			<a ui-sref=".index" class="item">
+				<i class="fa fa-home"></i>
+			</a>
+		  <a ui-sref=".pastes" class="item">
+		    <i class="fa fa-edit"></i>
+		  </a>
+		  <a ui-sref=".messages" class="item">
+		    <i class="fa fa-envelope"></i>
+		  </a>
+		</div>
 	</div>
 </div>
 
 <div class="row">
-	<div class="small-4 columns">
-		<ul class="side-nav">
-			<li ui-sref-active="active">
-				<a ui-sref=".pastes">Pastes</a>
-			</li>
-			<li ui-sref-active="active">
-				<a ui-sref=".messages">Messages</a>
-			</li>
-		</ul>
-	</div>
-	<div class="small-8 columns" ui-view></div>
+	<div class="small-12 columns" ui-view></div>
 </div>

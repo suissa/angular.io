@@ -17,8 +17,12 @@ function SessionProvider () {
 				return user;
 			};
 
+			// it will return a promise if
+			// the user object wasn't filled yet
 			Session.getUser = function () {
-				return angular.copy(user);
+				return typeof user === 'object' && user.id && angular.copy(user) || $http.get('/api/user/request-profile').then(function (res) {
+					return Session.updateUser(res.data);
+				});
 			};
 
 			return Session;

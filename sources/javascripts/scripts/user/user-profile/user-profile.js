@@ -8,6 +8,7 @@ function UserProfileController ($scope, Session) {
 
 var modl = angular.module('angular-io.user.profile', [
 	require('./user-profile-pastes/user-profile-pastes').name,
+	require('./user-profile-index/user-profile-index').name,
 	require('./user-profile-messages/user-profile-messages').name
 ])
 	.controller('UserProfileController', UserProfileController)

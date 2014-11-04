@@ -12,13 +12,14 @@ module.exports = function (sequelize, DataTypes) {
 			type: DataTypes.STRING(255),
 			unique: true
 		},
+		profile_photo: DataTypes.STRING,
 		uid: DataTypes.UUID,
 		online: DataTypes.BOOLEAN,
 		genre: {
 			type: DataTypes.ENUM,
 			values: ['male', 'female']
 		},
-		fb_id: DataTypes.UUID
+		fb_id: DataTypes.UUID,
 	}, {
 		timestamps: true,
 		paranoid: true,

@@ -94,6 +94,9 @@
       ],
       "exports": "angular.module('ngCodemirror')"
     },
+    "moment": {
+      "exports": "moment"
+    },
     "angular-moment": {
       "depends": [
         "angular",

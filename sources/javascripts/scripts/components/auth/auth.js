@@ -8,7 +8,13 @@ var modl = angular.module('angular-io.components.auth', [
 	require('./if-logged-directive').name,
 	require('./if-not-logged-directive').name
 ])
-	.run(function ($rootScope, $state, Auth, $location) {
+	.run(function ($rootScope, $state, Auth, $location, $anchorScroll) {
+		$rootScope.$on('$locationChangeSuccess', function (event) {
+			if($location.hash()) {
+				$anchorScroll();
+			}
+		});
+
 		$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
 			if(!toState.role) return;
 

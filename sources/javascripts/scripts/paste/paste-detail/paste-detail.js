@@ -4,8 +4,7 @@ var angular = require('angular');
 
 function PasteDetailController ($scope, paste, Session) {
 	$scope.paste = paste;
-	$scope.user = Session.getUser();
-
+	
 	this.updatePaste = function (paste) {
 		paste.saving = true;
 

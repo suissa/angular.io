@@ -1,29 +1,31 @@
-<div class="row">
-	<div class="large-12 columns">
+<div class="post-detail-row">
+	<article>
 		<h4>{{ ::post.title }}</h4>
 
 		<hr>
 
 		<p>{{ ::post.body }}</p>
 
-		<div class="row">
-			<div class="large-12 columns">
-				<img ng-src="{{ ::'http://placehold.it/32x32' }}" width="32" height="32">
-				<h7>{{ ::post.author.name }} <small>{{ post.created_at | momentFromNow }}</small></h7>
-			</div>
-		</div>
-	</div>
+		<hr>
+
+		<header>
+			<img src="http://placehold.it/42x42" width="42" height="42">
+			<h6>{{ ::post.author.name }}</h6>
+			<small>{{ ::post.created_at }}</small>
+		</header>
+	</article>
 </div>
 
-<div class="row">
-	<div class="large-12 columns" ng-repeat="comment in ::post.comments" id="post-comment-{{ ::comment.id }}">
-		<div class="row">
-			<div class="large-12 columns">
-				<img ng-src="{{ ::'http://placehold.it/32x32' }}" width="32" height="32">
-				<h6>{{ ::comment.author.name }}</h6> - <a href="#post-comment-{{ ::comment.id }}">{{ ::comment.id }}</a> - <small>{{ ::comment.created_at }}</small>
-			</div>
-		</div>
+<div class="comments-list-row">
+	<article ng-repeat="comment in ::post.comments" id="post-comment-{{ ::comment.id }}">
+		<header>
+			<img ng-src="{{ ::'http://placehold.it/42x42' }}" width="42" height="42">
+			<h6>{{ ::comment.author.name }}</h6>
+			<small>{{ ::comment.created_at }} - <a href="#post-comment-{{ ::comment.id }}">#{{ ::comment.id }}</a></small>
+		</header>
+
+		<hr>
 
 		<p>{{ ::comment.body }}</p>
-	</div>
+	</article>
 </div>

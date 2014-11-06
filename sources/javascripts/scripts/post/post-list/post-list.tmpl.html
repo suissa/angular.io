@@ -1,8 +1,7 @@
 <div class="post-list-row">
 	<aside>
-		<h5>Categories</h5>
-
-		<ul class="side-nav">
+		<ul>
+			<li><label>Categories</label></li>
 			<li ng-click="query.category_id = 0"><a href="">None</a></li>
 			<li ng-repeat="category in ::categories" ng-click="query.category_id = category.id"><a href="">{{ ::category.name }}</a></li>
 		</ul>
@@ -11,10 +10,8 @@
 	<section>
 		<div class="row">
 			<div class="small-12 columns">
-				<h4>Category</h4>
-
 				<dl class="filter">
-					<dt>Filter:</dt>
+					<dt>Status:</dt>
 					<dd ng-class="{
 						'active': query.status === 0
 					}" ng-click="query.status = 0"><a href="">All</a></dd>
@@ -30,26 +27,33 @@
 				</dl>
 			</div>
 		</div>
-		<div class="row">
-			<div class="small-12 columns" ng-if="!posts.length">
+		<div class="row" ng-if="!posts.length">
+			<div class="small-12 columns">
 				<h2>Sorry! We did find no posts.</h2>
 			</div>
 		</div>
 		<div class="post-cards-list" ng-repeat="post in posts" ng-if="posts.length">
 			<article>
-				<h6>
-					<a ui-sref="post.detail({ post: post.id })">{{ ::post.title }}</a>
+				<img src="http://placehold.it/40x40">
+				<div class="info">
+					<h6>
+						<a ui-sref="post.detail({ post: post.id })">{{ ::post.title }}</a>
 
-					<span class="status">
-						{{ ::post.status }}
-						<i class="fa" ng-class="{
-							'fa-lock': post.status === 'closed',
-							'fa-thumbs-o-up': post.status === 'solved',
-							'fa-paint-brush': post.status === 'open'
-						}"></i>
-					</span>
-				</h6>
-				<small>Posted by <a href="">{{ ::post.author.name }}</a></small>
+						<span class="label category">
+							category: {{ ::post.category.name }}
+						</span>
+
+						<span class="label status">
+							{{ ::post.status }}
+							<i class="fa" ng-class="{
+								'fa-lock': post.status === 'closed',
+								'fa-thumbs-o-up': post.status === 'solved',
+								'fa-paint-brush': post.status === 'open'
+							}"></i>
+						</span>
+					</h6>
+					<small>Posted by <a href="">{{ ::post.author.name }}</a> - {{ ::post.created_at }}</small>
+				</div>
 			</article>
 		</div>
 

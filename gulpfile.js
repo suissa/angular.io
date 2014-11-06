@@ -59,12 +59,15 @@ gulp.task('dependencies', function () {
 		'bower_components/codemirror/addon/display/*.js',
 		'bower_components/codemirror/addon/edit/*.js',
 		'bower_components/codemirror/addon/comment/*.js',
+		'bower_components/codemirror/addon/hint/show-hint.js',
 		'bower_components/codemirror/addon/hint/javascript-hint.js',
 		'bower_components/codemirror/addon/selection/*.js',
 		'bower_components/codemirror/addon/scroll/scrollpastend.js',
 		'bower_components/codemirror/addon/mode/multiplex.js',
 		'bower_components/codemirror/addon/fold/*.js',
 		'bower_components/codemirror/addon/runmode/colorize.js',
+		'bower_components/codemirror/addon/tern/tern.js',
+		'bower_components/codemirror/addon/search/*.js'
 	])
 		.pipe(concat('addons.js'))
 		.pipe(gulp.dest('public/lib/codemirror'));

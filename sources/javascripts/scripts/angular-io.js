@@ -5,7 +5,6 @@ var angular = require('angular');
 var modl = angular.module('angular-io', [
 	require('angular-ui-router'),
 	require('angular-foundation').name,
-	require('angular-moment').name,
 	
 	require('./components/components').name,
 	require('./user/user').name,

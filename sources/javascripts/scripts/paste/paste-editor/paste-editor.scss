@@ -1,12 +1,17 @@
 .CodeMirror {
   /* Set height, width, borders, and global font properties here */
   font-family: monospace;
-  height: 800px;
-  font-size: 18px;
+  border: 1px solid #eee;
+  height: auto;
+  margin-top: 12px;
+  border-radius: 4px;
+  border-color: rgba(0,0,0,.03) rgba(0,0,0,.04) rgba(0,0,0,.15);
+  box-shadow: 0px 4px 7px -7px rgba(0,0,0,.6);
 }
+
 .CodeMirror-scroll {
-  /* Set scrolling behaviour here */
-  overflow: auto;
+  overflow-y: hidden;
+  overflow-x: auto;
 }
 
 /* PADDING */

@@ -1,6 +1,7 @@
 'use strict';
 
 var angular = require('angular');
+var moment = require('moment');
 
 function PostListController ($scope, Post, categories) {
 	$scope.query = {};
@@ -30,7 +31,13 @@ function PostListController ($scope, Post, categories) {
 		promise.then(function (res) {
 			angular.extend(paginator, res.pagination);
 
-			$scope.posts = res.data;
+			var posts = res.data;
+
+			$scope.posts = posts.map(function (post) {
+				post.created_at = moment(post.created_at).fromNow();
+
+				return post;
+			});
 		});
 	});
 }
